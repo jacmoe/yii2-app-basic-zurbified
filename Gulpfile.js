@@ -50,6 +50,9 @@ var PATHS = {
     'vendor/zurb/foundation/js/foundation.tabs.js',
     'vendor/zurb/foundation/js/foundation.toggler.js',
     'vendor/zurb/foundation/js/foundation.tooltip.js',
+    "vendor/yiisoft/yii2/assets/yii.js",
+    "vendor/yiisoft/yii2/assets/yii.validation.js",
+    "vendor/yiisoft/yii2/assets/yii.activeForm.js",
     'js/**/!(custom).js',
     'js/custom.js'
   ]
