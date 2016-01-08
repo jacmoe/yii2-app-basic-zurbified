@@ -1,4 +1,4 @@
 
 $(document).ready(function() {
-  // do stuff
+  $(document).foundation();
 });
