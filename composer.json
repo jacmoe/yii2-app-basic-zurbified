@@ -10,7 +10,8 @@
     "yiisoft/yii2": ">=2.0.5",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "zurb/foundation": "^6.0"
+    "zurb/foundation": "^6.0",
+    "bower-asset/motion-ui": "^1.1"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",

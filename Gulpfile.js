@@ -20,9 +20,45 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     runSequence = require('run-sequence');
 
+var PATHS = {
+  sass: [
+    'vendor/zurb/foundation/scss',
+    'vendor/bower/motion-ui/src/'
+  ],
+  javascript: [
+    'vendor/bower/jquery/dist/jquery.js',
+    'vendor/bower/what-input/what-input.js',
+    'vendor/zurb/foundation/js/foundation.core.js',
+    'vendor/zurb/foundation/js/foundation.util.*.js',
+    // Paths to individual JS components defined below
+    'vendor/zurb/foundation/js/foundation.abide.js',
+    'vendor/zurb/foundation/js/foundation.accordion.js',
+    'vendor/zurb/foundation/js/foundation.accordionMenu.js',
+    'vendor/zurb/foundation/js/foundation.drilldown.js',
+    'vendor/zurb/foundation/js/foundation.dropdown.js',
+    'vendor/zurb/foundation/js/foundation.dropdownMenu.js',
+    'vendor/zurb/foundation/js/foundation.equalizer.js',
+    'vendor/zurb/foundation/js/foundation.interchange.js',
+    'vendor/zurb/foundation/js/foundation.magellan.js',
+    'vendor/zurb/foundation/js/foundation.offcanvas.js',
+    'vendor/zurb/foundation/js/foundation.orbit.js',
+    'vendor/zurb/foundation/js/foundation.responsiveMenu.js',
+    'vendor/zurb/foundation/js/foundation.responsiveToggle.js',
+    'vendor/zurb/foundation/js/foundation.reveal.js',
+    'vendor/zurb/foundation/js/foundation.slider.js',
+    'vendor/zurb/foundation/js/foundation.sticky.js',
+    'vendor/zurb/foundation/js/foundation.tabs.js',
+    'vendor/zurb/foundation/js/foundation.toggler.js',
+    'vendor/zurb/foundation/js/foundation.tooltip.js',
+    'js/**/!(custom).js',
+    'js/custom.js'
+  ]
+};
+
 var sassOptions = {
   errLogToConsole: true,
-  outputStyle: 'expanded'
+  outputStyle: 'expanded',
+  includePaths: PATHS.sass
 };
 
 var autoprefixerOptions = {
@@ -46,7 +82,7 @@ gulp.task('styles', function() {
 
 // Scripts
 gulp.task('scripts', function() {
-  return gulp.src(require('./js/all.json'))
+  return gulp.src(PATHS.javascript)
     //.pipe(jshint('.jshintrc'))
     //.pipe(jshint.reporter('default'))
     .pipe(sourcemaps.init())
