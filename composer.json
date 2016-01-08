@@ -1,5 +1,5 @@
 {
-  "name": "jacmoe/yii2-app-basic-gulp-sass",
+  "name": "jacmoe/yii2-app-basic-zurbified",
   "description": "Yii 2 Basic Project Template with Gulp and Sass support",
   "keywords": ["yii2", "framework", "basic", "sass", "gulp", "project template"],
   "type": "project",
@@ -10,7 +10,7 @@
     "yiisoft/yii2": ">=2.0.5",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "bower-asset/bootstrap-sass": "3.3.6"
+    "zurb/foundation": ">=6.1.1"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
