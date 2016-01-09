@@ -13,6 +13,7 @@
     "zurb/foundation": "^6.0",
     "bower-asset/motion-ui": "^1.1",
     "bower-asset/font-awesome": "^4.5",
+    "bower-asset/sass-rem": "^1.2",
     "bower-asset/what-input": "^1.1"
   },
   "require-dev": {
