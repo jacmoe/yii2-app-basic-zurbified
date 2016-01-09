@@ -1,14 +1,14 @@
-Yii 2 Basic Gulp Sass Project Template
+Yii 2 Basic Gulp Sass Application Template using Zurb Foundation for Sites
 ============================
 
-Yii 2 Basic Gulp Sass Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application that adds support for Gulp and Sass.
+Yii 2 Basic Gulp Sass Application Template using Zurb Foundation for Sites is a skeleton [Yii 2](http://www.yiiframework.com/) application that adds support for Gulp and Sass.
 
 The template contains the basic features including user login/logout and a contact page.
 It includes all commonly used configurations that would allow you to focus on adding new
 features to your application.
 
-[![Latest Stable Version](https://poser.pugx.org/jacmoe/yii2-app-basic-gulp-sass/v/stable.png)](https://packagist.org/packages/jacmoe/yii2-app-basic-gulp-sass)
-[![Total Downloads](https://poser.pugx.org/jacmoe/yii2-app-basic-gulp-sass/downloads.png)](https://packagist.org/packages/jacmoe/yii2-app-basic-gulp-sass)
+[![Latest Stable Version](https://poser.pugx.org/jacmoe/yii2-app-basic-zurbified/v/stable.png)](https://packagist.org/packages/jacmoe/yii2-app-basic-zurbified)
+[![Total Downloads](https://poser.pugx.org/jacmoe/yii2-app-basic-zurbified/downloads.png)](https://packagist.org/packages/jacmoe/yii2-app-basic-zurbified)
 
 DIRECTORY STRUCTURE
 -------------------

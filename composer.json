@@ -1,6 +1,6 @@
 {
   "name": "jacmoe/yii2-app-basic-zurbified",
-  "description": "Yii 2 Basic Project Template with Gulp and Sass support",
+  "description": "Yii 2 Basic Gulp Sass Application Template using Zurb Foundation for Sites",
   "keywords": ["yii2", "framework", "basic", "sass", "gulp", "project template"],
   "type": "project",
   "license": "MIT",
