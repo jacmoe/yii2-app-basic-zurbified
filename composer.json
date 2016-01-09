@@ -3,7 +3,7 @@
   "description": "Yii 2 Basic Gulp Sass Application Template using Zurb Foundation for Sites",
   "keywords": ["yii2", "framework", "basic", "sass", "gulp", "project template"],
   "type": "project",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.4.0",
@@ -12,6 +12,7 @@
     "yiisoft/yii2-swiftmailer": "*",
     "zurb/foundation": "^6.0",
     "bower-asset/motion-ui": "^1.1",
+    "bower-asset/font-awesome": "^4.5",
     "bower-asset/what-input": "^1.1"
   },
   "require-dev": {

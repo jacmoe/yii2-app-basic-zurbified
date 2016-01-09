@@ -1,3 +1,11 @@
+The Yii 2 Basic Gulp Sass Application Template using Zurb Foundation for Sites is free software. It is released under the terms of
+the following BSD License.
+
+Copyright © 2015 by Jacob Moen (http://jacmoe.dk)
+All rights reserved.
+
+*Original Yii license below*
+
 The Yii framework is free software. It is released under the terms of
 the following BSD License.
 
