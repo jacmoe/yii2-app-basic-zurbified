@@ -54,6 +54,11 @@ use yii\helpers\ArrayHelper;
 class Nav extends Widget
 {
     /**
+     * @var array the HTML attributes for the widget container tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     */
+    public $options = [];
+    /**
      * @var array list of items in the nav widget. Each array element represents a single
      * menu item which can be either a string or an array with the following structure:
      *
