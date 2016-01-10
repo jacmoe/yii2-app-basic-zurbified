@@ -1,1 +1,9 @@
 //
+.top-bar {
+  .menu > li.active {
+      a {
+        color: #fff;
+        font-weight: bolder;
+      }
+    }
+}
