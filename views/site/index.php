@@ -26,7 +26,9 @@ $this->title = 'My Yii Application';
                             ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                             fugiat nulla pariatur.</p>
                     </div>
-                    <p><a class="button" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                    <div class="action text-center">
+                        <a class="button secondary expanded" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a>
+                    </div>
                 </div>
             </div>
             <div class="column">
@@ -37,7 +39,9 @@ $this->title = 'My Yii Application';
                             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                             ex ea commodo consequat.</p>
                     </div>
-                    <p><a class="button" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                    <div class="action text-center">
+                        <a class="button secondary expanded" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a>
+                    </div>
                 </div>
             </div>
             <div class="column">
@@ -49,7 +53,9 @@ $this->title = 'My Yii Application';
                             ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                             fugiat nulla pariatur.</p>
                     </div>
-                    <p><a class="button" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                    <div class="action text-center">
+                        <a class="button secondary expanded" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a>
+                    </div>
                 </div>
             </div>
         </div>
