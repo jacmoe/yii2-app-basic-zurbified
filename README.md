@@ -64,11 +64,26 @@ php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
 php composer.phar create-project --prefer-dist --stability=dev jacmoe/yii2-app-basic-gulp-sass basic
 ~~~
 
+### Post-installation
+Install the node modules by running this command at the project root directory:
+```
+npm install
+```
+After a successful install, build the project using:
+```
+gulp build
+```
+
 Now you should be able to access the application through the following URL, assuming `basic` is the directory
 directly under the Web root.
 
 ~~~
 http://localhost/basic/web/
+~~~
+
+To launch a browser window and watch the project for changes:
+~~~
+gulp watch
 ~~~
 
 

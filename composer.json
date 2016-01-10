@@ -10,7 +10,7 @@
     "yiisoft/yii2": ">=2.0.5",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "zurb/foundation": "^6.0",
+    "bower-asset/foundation-sites": "^6.1",
     "bower-asset/motion-ui": "^1.1",
     "bower-asset/font-awesome": "^4.5",
     "bower-asset/sass-rem": "^1.2",
@@ -27,9 +27,7 @@
   },
     "scripts": {
         "post-create-project-cmd": [
-            "yii\\composer\\Installer::postCreateProject",
-            "npm install",
-            "gulp build"
+            "yii\\composer\\Installer::postCreateProject"
         ]
     },
     "extra": {
