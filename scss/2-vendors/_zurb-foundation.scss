@@ -4,8 +4,8 @@
 @include foundation-global-styles;
 @include foundation-grid;
 @include foundation-typography;
-@include foundation-button;
 @include foundation-forms;
+@include foundation-button;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 @include foundation-accordion;
@@ -22,6 +22,7 @@
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;
+@include foundation-menu-icon;
 @include foundation-off-canvas;
 @include foundation-orbit;
 @include foundation-pagination;
