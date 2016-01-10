@@ -9,6 +9,7 @@
 // Common style and global variables/mixins
 // that does not depend on vendors
 @import "1-common/colors";
+@import "1-common/functions";
 @import "1-common/fixes";
 @import "1-common/foundation-settings";
 
@@ -20,7 +21,8 @@
 // Global styling that makes use of vendors
 @import "3-global/site";
 @import "3-global/typography";
-@import "3-global/navbar";
+@import "3-global/topbar";
+@import "3-global/yii";
 
 // Components that could be used in multiple pages
 //@import "4-components/all";
