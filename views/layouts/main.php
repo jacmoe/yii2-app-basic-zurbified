@@ -4,8 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use app\components\Nav;
 use yii\widgets\Breadcrumbs;
 
 ?>
@@ -24,38 +23,44 @@ use yii\widgets\Breadcrumbs;
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
+    <header>
+        <div class="top-bar">
+            <div class="row">
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li class="menu-text">
+                            <a href="<?= Yii::$app->homeUrl ?>">My Company</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <?php
+                    echo Nav::widget([
+                        'options' => ['class' => 'menu'],
+                        'items' => [
+                            ['label' => 'Home', 'url' => ['/site/index']],
+                            ['label' => 'About', 'url' => ['/site/about']],
+                            ['label' => 'Contact', 'url' => ['/site/contact']],
+                            Yii::$app->user->isGuest ? (
+                                ['label' => 'Login', 'url' => ['/site/login']]
+                            ) : (
+                                '<li>'
+                                . Html::beginForm(['/site/logout'], 'post')
+                                . Html::submitButton(
+                                    'Logout (' . Yii::$app->user->identity->username . ')',
+                                    ['class' => 'button']
+                                )
+                                . Html::endForm()
+                                . '</li>'
+                            )
+                        ],
+                    ]);
+                    ?>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="row">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -64,7 +69,7 @@ use yii\widgets\Breadcrumbs;
 </div>
 
 <footer class="footer">
-    <div class="container">
+    <div class="row">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
