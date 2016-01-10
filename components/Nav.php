@@ -8,6 +8,7 @@
 namespace app\components;
 
 use Yii;
+use yii\base\Widget;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 
