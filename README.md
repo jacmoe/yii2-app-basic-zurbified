@@ -61,7 +61,7 @@ You can then install this project template using the following command:
 
 ~~~
 php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
-php composer.phar create-project --prefer-dist --stability=dev jacmoe/yii2-app-basic-gulp-sass basic
+php composer.phar create-project --prefer-dist --stability=dev jacmoe/yii2-app-basic-zurbified basiczurb
 ~~~
 
 ### Post-installation
