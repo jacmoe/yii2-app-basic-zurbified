@@ -10,8 +10,8 @@
     "yiisoft/yii2": ">=2.0.5",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "bower-asset/foundation-sites": "^6.1",
-    "bower-asset/motion-ui": "^1.1",
+    "bower-asset/foundation-sites": "^6.2",
+    "bower-asset/motion-ui": "^1.2.2",
     "bower-asset/font-awesome": "^4.5",
     "bower-asset/sass-rem": "^1.2",
     "bower-asset/what-input": "^1.1"
