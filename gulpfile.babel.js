@@ -26,7 +26,7 @@ function loadConfig() {
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(gulp.parallel(sass, javascript, copy)));
+ gulp.series(gulp.parallel(sass, javascript, yiiscript, copy)));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -57,7 +57,7 @@ function sass() {
     .pipe($.autoprefixer({
       browsers: COMPATIBILITY
     }))
-    .pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
+    .pipe($.if(PRODUCTION, $.rename({ suffix: '.min' })))
     .pipe($.if(PRODUCTION, $.cssnano()))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
     .pipe(gulp.dest(PATHS.dist + '/css'))
@@ -70,7 +70,22 @@ function javascript() {
   return gulp.src(PATHS.javascript)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.concat('app.js'))
+    .pipe($.concat('all.js'))
+    .pipe($.if(PRODUCTION, $.rename({ suffix: '.min' })))
+    .pipe($.if(PRODUCTION, $.uglify()
+      .on('error', e => { console.log(e); })
+    ))
+    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    .pipe(gulp.dest(PATHS.dist + '/js'));
+}
+
+// Combine Yii JavaScript into one file
+// In production, the file is minified
+function yiiscript() {
+  return gulp.src(PATHS.yiiscript)
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('yii.js'))
+    .pipe($.if(PRODUCTION, $.rename({ suffix: '.min' })))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
     ))

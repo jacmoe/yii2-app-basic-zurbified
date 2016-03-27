@@ -6,7 +6,8 @@
 use yii\helpers\Html;
 use app\components\Nav;
 use yii\widgets\Breadcrumbs;
-
+use app\assets\AppAsset;
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -16,7 +17,6 @@ use yii\widgets\Breadcrumbs;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?= Html::cssFile(YII_DEBUG ? '@web/css/all.css' : '@web/css/all.min.css?v=' . filemtime(Yii::getAlias('@webroot/css/all.min.css'))) ?>
     <?php $this->head() ?>
 </head>
 <body>
@@ -77,7 +77,6 @@ use yii\widgets\Breadcrumbs;
     </div>
 </footer>
 
-<?= Html::jsFile(YII_DEBUG ? '@web/js/all.js' : '@web/js/all.min.js?v=' . filemtime(Yii::getAlias('@webroot/js/all.min.js'))) ?>
 <?php $this->endBody() ?>
 </body>
 </html>

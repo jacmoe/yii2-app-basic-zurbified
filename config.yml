@@ -6,18 +6,10 @@ COMPATIBILITY:
   - "last 2 versions"
   - "ie >= 9"
 
-# UnCSS will use these settings
-UNCSS_OPTIONS:
-  html:
-    - "src/**/*.html"
-  ignore:
-    - !!js/regexp .foundation-mq
-    - !!js/regexp ^\.is-.*
-
 # Gulp will reference these paths when it copies files
 PATHS:
   # Path to dist folder
-  dist: "web"
+  dist: "assets/dist"
   # Paths to static assets that aren't images, CSS, or JavaScript
   assets:
     - "src/assets/**/*"
@@ -56,10 +48,11 @@ PATHS:
     - "vendor/bower/foundation-sites/js/foundation.tabs.js"
     - "vendor/bower/foundation-sites/js/foundation.toggler.js"
     - "vendor/bower/foundation-sites/js/foundation.tooltip.js"
+    # Paths to your own project code are here
+    - "js/!(custom).js"
+    - "js/custom.js"
+  yiiscript:
     # Yii2 scripts
     - "vendor/yiisoft/yii2/assets/yii.js"
     - "vendor/yiisoft/yii2/assets/yii.validation.js"
     - "vendor/yiisoft/yii2/assets/yii.activeForm.js"
-    # Paths to your own project code are here
-    - "js/!(custom).js"
-    - "js/custom.js"
