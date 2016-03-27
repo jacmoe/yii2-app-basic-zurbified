@@ -4,101 +4,91 @@ import plugins  from 'gulp-load-plugins';
 import yargs    from 'yargs';
 import browser  from 'browser-sync';
 import gulp     from 'gulp';
+import panini   from 'panini';
 import rimraf   from 'rimraf';
+import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
-import del      from 'del';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
 
+// Check for --production flag
+const PRODUCTION = !!(yargs.argv.production);
+
 // Load settings from settings.yml
-const { COMPATIBILITY, UNCSS_OPTIONS, PATHS } = loadConfig();
+const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
 
 function loadConfig() {
-    let ymlFile = fs.readFileSync('config.yml', 'utf8');
-    return yaml.load(ymlFile);
+  let ymlFile = fs.readFileSync('config.yml', 'utf8');
+  return yaml.load(ymlFile);
 }
 
-var sassOptions = {
-    errLogToConsole: true,
-    outputStyle: 'expanded',
-    includePaths: PATHS.sass
-};
+// Build the "dist" folder by running all of the below tasks
+gulp.task('build',
+ gulp.series(gulp.parallel(sass, javascript, copy)));
 
-var autoprefixerOptions = {
-    browsers: COMPATIBILITY
-};
+// Build the site, run the server, and watch for file changes
+gulp.task('default',
+  gulp.series('build', server, watch));
 
-// Styles
-gulp.task('styles', function() {
-    return gulp.src('scss/all.scss')
+// Delete the "dist" folder
+// This happens every time a build starts
+function clean(done) {
+  //rimraf(PATHS.dist, done);
+}
+
+// Copy files out of the assets folder
+// This task skips over the "img", "js", and "scss" folders, which are parsed separately
+function copy() {
+  return gulp.src(PATHS.assets)
+    .pipe(gulp.dest(PATHS.dist + '/assets'));
+}
+
+// Compile Sass into CSS
+// In production, the CSS is compressed
+function sass() {
+  return gulp.src('scss/all.scss')
     .pipe($.sourcemaps.init())
-    .pipe($.sass(sassOptions).on('error', sass.logError))
-    .pipe($.autoprefixer(autoprefixerOptions))
-    .pipe($.sourcemaps.write('.', { sourceRoot: '../../scss/' }))
-    .pipe(gulp.dest('web/css'))
-    .pipe($.if('*.css', rename({ suffix: '.min' })))
-    .pipe($.if('*.css', $.cssnano()))
-    .pipe($.if('*.css', gulp.dest('web/css')))
-    .pipe($.if('*.css', $.notify({ message: 'Styles task complete' })));
-});
+    .pipe($.sass({
+      includePaths: PATHS.sass
+    })
+      .on('error', $.sass.logError))
+    .pipe($.autoprefixer({
+      browsers: COMPATIBILITY
+    }))
+    .pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
+    .pipe($.if(PRODUCTION, $.cssnano()))
+    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    .pipe(gulp.dest(PATHS.dist + '/css'))
+    .pipe(browser.reload({ stream: true }));
+}
 
-// Scripts
-gulp.task('scripts', function() {
-    return gulp.src(PATHS.javascript)
+// Combine JavaScript into one file
+// In production, the file is minified
+function javascript() {
+  return gulp.src(PATHS.javascript)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.concat('all.js'))
-    .pipe($.sourcemaps.write('.', { sourceRoot: '../../js/' }))
-    .pipe(gulp.dest('web/js'))
-    .pipe($.if('*.js', $.rename({ suffix: '.min' })))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.js', gulp.dest('web/js')))
-    .pipe($.if('*.js', $.notify({ message: 'Scripts task complete' })));
-});
+    .pipe($.concat('app.js'))
+    .pipe($.if(PRODUCTION, $.uglify()
+      .on('error', e => { console.log(e); })
+    ))
+    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    .pipe(gulp.dest(PATHS.dist + '/js'));
+}
 
-// Copy fonts
-gulp.task('fonts', function() {
-    return gulp.src([
-        'vendor/bower/font-awesome/fonts/*'
-    ])
-    .pipe(gulp.dest('./web/fonts'));
-});
+// Start a server with BrowserSync to preview the site in
+function server(done) {
+  browser.init({
+      proxy: "https://bugitor.dev"
+  });
+  done();
+}
 
-// Clean
-gulp.task('clean', function() {
-    return del(['web/css/*', 'web/js/*', 'web/fonts/*']);
-});
-
-// Build the "web" folder by running all of the above tasks
-gulp.task('build', function(callback) {
-    runSequence('clean', ['styles', 'scripts', 'fonts'], callback);
-});
-
-// Watch
-gulp.task('watch', function() {
-
-    // Initialize Browsersync
-    browsersync.init({
-        proxy: "http://foundationtest.dev"
-    });
-
-    // Watch .scss files
-    gulp.watch('scss/**/*.scss', ['styles']);
-
-    // Watch .js files
-    gulp.watch('js/**/*.js', ['scripts']);
-
-    // Watch image files
-    //gulp.watch('img/**/*', ['images']);
-
-    // Watch any view files in 'views', reload on change
-    gulp.watch(['views/**/*.php']).on('change', browsersync.reload);
-
-    // Watch any files in 'web', reload on change
-    gulp.watch(['web/js/*']).on('change', browsersync.reload);
-    gulp.watch(['web/css/*']).on('change', browsersync.reload);
-});
-
-gulp.task('default', ['build', 'watch'], function() {});
+// Watch for changes to static assets, pages, Sass, and JavaScript
+function watch() {
+  gulp.watch(PATHS.assets, copy);
+  gulp.watch('scss/**/*.scss', sass);
+  gulp.watch('js/**/*.js', gulp.series(javascript, browser.reload));
+}
