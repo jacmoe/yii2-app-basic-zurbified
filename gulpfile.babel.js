@@ -26,7 +26,7 @@ function loadConfig() {
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(gulp.parallel(sass, javascript, yiiscript, copy)));
+ gulp.series(clean, gulp.parallel(sass, babelscript, plainscript, fonts)));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -35,20 +35,19 @@ gulp.task('default',
 // Delete the "dist" folder
 // This happens every time a build starts
 function clean(done) {
-  //rimraf(PATHS.dist, done);
+  rimraf(PATHS.dist, done);
 }
 
-// Copy files out of the assets folder
-// This task skips over the "img", "js", and "scss" folders, which are parsed separately
-function copy() {
-  return gulp.src(PATHS.assets)
-    .pipe(gulp.dest(PATHS.dist + '/assets'));
+// Copy fonts
+function fonts() {
+  return gulp.src(PATHS.fonts)
+    .pipe(gulp.dest(PATHS.dist + '/fonts'));
 }
 
 // Compile Sass into CSS
 // In production, the CSS is compressed
 function sass() {
-  return gulp.src('scss/all.scss')
+  return gulp.src('scss/app.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass
@@ -64,13 +63,13 @@ function sass() {
     .pipe(browser.reload({ stream: true }));
 }
 
-// Combine JavaScript into one file
+// Combine Babel (ES6) JavaScript into one file
 // In production, the file is minified
-function javascript() {
-  return gulp.src(PATHS.javascript)
+function babelscript() {
+  return gulp.src(PATHS.babelscript)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.concat('all.js'))
+    .pipe($.concat('app.js'))
     .pipe($.if(PRODUCTION, $.rename({ suffix: '.min' })))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
@@ -79,12 +78,12 @@ function javascript() {
     .pipe(gulp.dest(PATHS.dist + '/js'));
 }
 
-// Combine Yii JavaScript into one file
+// Combine plain JavaScript (non-ES6) into one file
 // In production, the file is minified
-function yiiscript() {
-  return gulp.src(PATHS.yiiscript)
+function plainscript() {
+  return gulp.src(PATHS.plainscript)
     .pipe($.sourcemaps.init())
-    .pipe($.concat('yii.js'))
+    .pipe($.concat('custom.js'))
     .pipe($.if(PRODUCTION, $.rename({ suffix: '.min' })))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
