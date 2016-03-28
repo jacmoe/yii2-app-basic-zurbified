@@ -15,7 +15,7 @@ const $ = plugins();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from settings.yml
-const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
+const { COMPATIBILITY, PROXY, PORT, PATHS } = loadConfig();
 
 function loadConfig() {
   let ymlFile = fs.readFileSync('config.yml', 'utf8');
@@ -93,14 +93,14 @@ function plainscript() {
 // Start a server with BrowserSync to preview the site in
 function server(done) {
   browser.init({
-      proxy: "https://bugitor.dev"
+      proxy: PROXY
   });
   done();
 }
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
 function watch() {
-  gulp.watch(PATHS.assets, copy);
+  gulp.watch(PATHS.fonts, fonts);
   gulp.watch('scss/**/*.scss', sass);
-  gulp.watch('js/**/*.js', gulp.series(javascript, browser.reload));
+  gulp.watch('js/**/*.js', gulp.series(plainscript, browser.reload));
 }

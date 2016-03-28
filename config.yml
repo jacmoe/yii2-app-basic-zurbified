@@ -1,4 +1,5 @@
 # Your project's server will run on localhost:xxxx at this port
+PROXY: "http://localhost"
 PORT: 8000
 
 # Autoprefixer will make sure your CSS works with these browsers
