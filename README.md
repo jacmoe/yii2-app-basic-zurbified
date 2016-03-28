@@ -83,7 +83,17 @@ http://localhost/basic/web/
 
 To launch a browser window and watch the project for changes:
 ~~~
-gulp watch
+gulp
+~~~
+
+To build optimized for production (minification, etc) specify the `production` flag:
+
+~~~
+gulp build --production
+~~~
+and/or
+~~~
+gulp --production
 ~~~
 
 
